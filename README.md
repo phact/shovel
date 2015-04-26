@@ -1,7 +1,7 @@
 # shovel
 wget powered go program for multi-threaded web scraping
 
-###To run
+###Running Shovel:
 
 Install golang (osx):
 `brew install hg`
