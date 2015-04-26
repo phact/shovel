@@ -54,7 +54,7 @@ func main() {
 //call wget
 func callWget(url string, futuresChannel chan int, verbose bool) /* *exec.Cmd */ {
 	url = "www." + url
-	cmd := exec.Command("wget", "--random-wait", "-r", "-t", "10", "-A", "-R", "-nc", "--tries=5", "--wait=10", url)
+	cmd := exec.Command("wget", "--random-wait", "-r", "-t", "10", "-nc", "--tries=5", "--wait=10", url)
 	//if verbose drop wget output into stdout
 	if verbose {
 		cmd.Stdout = os.Stdout
