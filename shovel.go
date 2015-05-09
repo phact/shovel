@@ -18,13 +18,13 @@ func check(e error) {
 
 func main() {
 	//in flight futures default
-	maxFutures := 100
+	maxFutures := 500
 	currentFutures := 0
 	var futuresChannel chan int = make(chan int)
 
 	verbose := false
 
-	file, err := os.Open("../data/urls.txt")
+	file, err := os.Open("data/urls.txt")
 	check(err)
 
 	defer file.Close()
@@ -54,7 +54,9 @@ func main() {
 //call wget
 func callWget(url string, futuresChannel chan int, verbose bool) /* *exec.Cmd */ {
 	url = "www." + url
-	cmd := exec.Command("wget", "--random-wait", "-r", "-t", "10", "-nc", "--tries=5", "--wait=10", url)
+	log.Println("COMMAND:  ")
+	log.Println("wget", "--random-wait", "--ignore-case", "-r", "-t", "10", "-nc", "--tries=5", "--wait=10", "--reject png,jpg,jpg,JPG,jpeg,css,gif,swf,js,ico", url)
+	cmd := exec.Command("wget", "--random-wait", "--ignore-case", "-r", "-t", "10", "-nc", "--tries=5", "--wait=10", "--reject=png,jpg,jpg,JPG,jpeg,css,gif,swf,js,ico", url)
 	//if verbose drop wget output into stdout
 	if verbose {
 		cmd.Stdout = os.Stdout
